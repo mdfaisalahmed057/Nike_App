@@ -21,7 +21,7 @@ Clone this repository using the following command:
 
 bash
 Copy code
-git clone https://github.com/your-username/nike-ui-react-native.git
+git clone https://github.com/mdfaisalahmed057/nike-ui-react-native.git
 Navigate to the project directory:
 
 bash
@@ -40,13 +40,7 @@ Use a suitable emulator or scan the QR code on your physical device to run the a
 Contributions
 Contributions to this project are welcome! If you have any ideas for improvements or new features, please feel free to submit a pull request. Make sure to adhere to the project's coding conventions and guidelines.
 
-License
-This project is licensed under the MIT License. Feel free to modify and distribute the codebase, ensuring that proper attribution is given.
-
-Acknowledgments
-We would like to express our gratitude to the creators of React Native, React Navigation, and Redux for their remarkable frameworks that facilitated the development of this project.
-
 Contact
-For any inquiries or feedback, please reach out to us at email@example.com. We would be happy to assist you!
+For any inquiries or feedback, please reach out to us at mdfais2995@gmailcom. We would be happy to assist you!
 
 Let's bring Nike's stunning user interface to life with React Native, React Navigation, and Redux!
