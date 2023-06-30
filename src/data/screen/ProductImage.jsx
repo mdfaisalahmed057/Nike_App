@@ -1,10 +1,41 @@
- import { StyleSheet, Text, View,Image,FlatList, Pressable } from 'react-native';
+ import { StyleSheet, Text, View,Image,FlatList, Pressable, ActivityIndicator } from 'react-native';
  import { useSelector,useDispatch} from 'react-redux';
 import { productSlice } from '../../store/productSlice';
+import { useGetProductQuery } from '../../store/apiSlice';
+import { useEffect ,useState} from 'react';
+  export default function ProductImage({navigation}) {
 
- export default function ProductImage({navigation}) {
+    const [details, setDetails] = useState([]);
+
+    useEffect(() => {
+      const fetching = async () => {
+        try {
+          const res = await fetch("http://localhost:3006/resuume");
+          const data = await res.json(); // Parse response as JSON
+          console.log(data); // Debug: Log the parsed data
+          setDetails(data); // Update state with the parsed data
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      fetching();
+    }, []);
+  
+    console.log(details); 
+ 
   const products=useSelector((state)=>state.products.products)
   const dispatch=useDispatch()
+
+  const{data,error,isLoading}=useGetProductQuery()
+if(isLoading){
+  return <ActivityIndicator/>
+}
+if(error){
+  console.log(error)
+  return <Text>{error.error}</Text> 
+}
+const product=data
+console.log(product)
   return (
     <>
     <FlatList

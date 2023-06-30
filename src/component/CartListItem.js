@@ -4,7 +4,6 @@ import { useSelector,useDispatch } from "react-redux";
 import { cartSlice } from "../store/CartSlice";
 const CartListItem = ({ cartItem }) => {
   const dispatch=useDispatch()
-
   const increaseQuantity = () => {
     dispatch(
       cartSlice.actions.changeQuantity({
