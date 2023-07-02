@@ -10,7 +10,7 @@ import { useEffect ,useState} from 'react';
     useEffect(() => {
       const fetching = async () => {
         try {
-          const res = await fetch("http://localhost:3006/resuume");
+          const res = await fetch("http://localhost:3006/proucts");
           const data = await res.json(); // Parse response as JSON
           console.log(data); // Debug: Log the parsed data
           setDetails(data); // Update state with the parsed data
