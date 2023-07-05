@@ -1,13 +1,37 @@
 import React from 'react'
-import { FlatList, Text,View,StyleSheet, Pressable } from 'react-native'
+import { FlatList, Text,View,StyleSheet, Pressable, ActivityIndicator, Alert } from 'react-native'
 import CartListItem from '../../component/CartListItem'
- import { useSelector } from 'react-redux'
- import { selectSubtotal,selectDelivery ,total} from '../../store/CartSlice'
+ import { useDispatch, useSelector } from 'react-redux'
+ import { selectSubtotal,selectDelivery ,total,cartSlice} from '../../store/CartSlice'
+ import { useCreateOrderMutation } from '../../store/apiSlice'
+ 
 function ShoppingCart() {
   const cartItem=useSelector((state)=>state.cart.items)
   const subtotal=useSelector(selectSubtotal)
   const totals=useSelector(total)
   const deliveryfee=useSelector(selectDelivery)
+  const dispatch=useDispatch()
+  const[createOrder,{data,error,isLoading}]=useCreateOrderMutation()
+   const onCreateOrder=async()=>{
+    const result=await createOrder({
+      items:cartItem,
+      subtotal,
+      deliveryfee,
+      total,
+      customer:{
+        name:'vadim',
+        address:'My Home',
+        email:'Vadim@notjust.dev'
+      }
+    })
+    if(result.data?.status==='ok'){
+      Alert.alert(
+        'order has been submitted',
+        `Your order reference is:${result.data.data.ref}`
+      )
+      dispatch(cartSlice.actions.clear())
+    }
+   }
   return (
     <>
     <FlatList
@@ -33,8 +57,11 @@ function ShoppingCart() {
       )}
     />
     <View style={styles.footer}>
-<Pressable style={styles.button}>
-  <Text style={styles.buttonText}>Checkout</Text>
+<Pressable onPress={onCreateOrder} style={styles.button}>
+  <Text style={styles.buttonText}>
+    Checkout
+    {isLoading&& <ActivityIndicator/>}
+    </Text>
 </Pressable>
     </View>
     

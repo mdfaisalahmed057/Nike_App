@@ -10,7 +10,7 @@ export const cartSlice=createSlice({
     reducers:{
         addCartItem:(state,aciton)=>{
             const newProduct=aciton.payload.product 
-            const cartItem=state.items.find((item)=>item.product.id===newProduct.id)
+            const cartItem=state.items.find((item)=>item.product._id===newProduct._id)
             if(cartItem){
                 cartItem.quantity+=1
             }else{
@@ -19,7 +19,7 @@ export const cartSlice=createSlice({
         },
         changeQuantity:(state,action)=>{
         const {productId,amount}=action.payload;
-        const cartItem=state.items.find(item=>item.product.id===productId)
+        const cartItem=state.items.find(item=>item.product._id===productId)
         if(cartItem){
             cartItem.quantity+=amount
         }
@@ -28,9 +28,14 @@ export const cartSlice=createSlice({
             state.items=state.items.filter(item=>item!=cartItem)
         }
 
+        },
+        clear:(state)=>{
+            state.items=[]
         }
     }
+  
 })
+
 
 export const numberOfItems=((state)=>state.cart.items.length)
 export const selectSubtotal=(state)=>state.cart.items.reduce((sum, item) => sum + item.product.price * item.quantity,0)
