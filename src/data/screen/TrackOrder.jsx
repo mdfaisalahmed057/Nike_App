@@ -14,12 +14,14 @@ import {
     console.log(data)
   return (
     <View style={styles.root}>
+      
         <TextInput
-        style={styles.input}
+        style={styles.inut}
         value={ref}
         onChangeText={setRef}
         placeholder='Your order reference'
         />
+
         {isLoading&& <ActivityIndicator/>}
          {data?.status!=='ok'&& <Text>order Not Found</Text>}
         {data?.status ==='ok' && <Text>{JSON.stringify(data.data,null,2)}</Text>}
