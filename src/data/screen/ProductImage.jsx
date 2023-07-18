@@ -1,14 +1,6 @@
  import { StyleSheet, Text, View,Image,FlatList, Pressable, ActivityIndicator } from 'react-native';
- import { useSelector,useDispatch} from 'react-redux';
-import { productSlice } from '../../store/productSlice';
-import { useGetProductQuery } from '../../store/apiSlice';
-import { useGetProductsQuery } from '../../store/apiSlice';
-import { useEffect ,useState} from 'react';
-export default function ProductImage({navigation}) {
-
-  
-  
-
+ import { useGetProductsQuery } from '../../store/apiSlice';
+ export default function ProductImage({navigation}) {
 const{data,error,isLoading}=useGetProductsQuery()
 if(isLoading){
   return <ActivityIndicator/>
@@ -32,9 +24,7 @@ const product=data
           >
           <Image source={{ uri: item.image }} style={styles.image} />
           </Pressable>
- 
         </View>
-
       )}
     
       numColumns={2}
