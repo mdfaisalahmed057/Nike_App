@@ -4,25 +4,23 @@ import CartListItem from '../../component/CartListItem'
  import { useDispatch, useSelector } from 'react-redux'
  import { selectSubtotal,selectDelivery ,total,cartSlice} from '../../store/CartSlice'
  import { useCreateOrderMutation } from '../../store/apiSlice'
- 
+ import { authSlice } from '../../store/autSlice'
 function ShoppingCart() {
   const cartItem=useSelector((state)=>state.cart.items)
+  const auth=useSelector((state)=>state.auth)
   const subtotal=useSelector(selectSubtotal)
   const totals=useSelector(total)
   const deliveryfee=useSelector(selectDelivery)
   const dispatch=useDispatch()
   const[createOrder,{data,error,isLoading}]=useCreateOrderMutation()
-   const onCreateOrder=async()=>{
+  
+    const onCreateOrder=async()=>{
     const result=await createOrder({
       items:cartItem,
       subtotal,
       deliveryfee,
       total,
-      customer:{
-        name:'vadim',
-        address:'My Home',
-        email:'Vadim@notjust.dev'
-      }
+      customer:auth
     })
     if(result.data?.status==='ok'){
       Alert.alert(
