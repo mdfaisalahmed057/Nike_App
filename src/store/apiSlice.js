@@ -20,7 +20,20 @@ export const apiSlice = createApi({
         body:newOrder,
       }),
     }),
-
+    createUser:builder.mutation({
+query:(newuser)=>({
+  method:"POST",
+  url:"signup",
+  body:newuser
+})
+}),
+loginUser:builder.mutation({
+  query:(loginuser)=>({
+    method:"POST",
+    url:"login",
+    body:loginuser
+  })
+  }),
     getOrder:builder.query({
       query:(id)=>`orders/${id}`,
     }), 
@@ -29,4 +42,4 @@ export const apiSlice = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProductsQuery, useGetProductQuery,useCreateOrderMutation,useGetOrderQuery } = apiSlice;
+export const { useLoginUserMutation,useGetProductsQuery, useGetProductQuery,useCreateOrderMutation,useGetOrderQuery,useCreateUserMutation } = apiSlice;

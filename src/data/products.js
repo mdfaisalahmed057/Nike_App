@@ -350,4 +350,5 @@ A timeless rubber sole combines with a soft sockliner and encapsulated Nike Air 
     
     A timeless rubber sole combines with a soft sockliner and encapsulated Nike Air cushioning for all-day comfort. The rubber outsole offers durable traction on a variety of surfaces.`,
   },
+  
 ];
